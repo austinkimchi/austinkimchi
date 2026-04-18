@@ -5,18 +5,20 @@ on:
     - cron: "0 18 * * 0"
   workflow_dispatch:
 
+permissions:
+  contents: write   # needed to push to the metrics branch
+  metadata: read
+
 jobs:
   github-metrics:
     runs-on: ubuntu-latest
-
     steps:
       - name: Profile summary
         uses: lowlighter/metrics@master
         with:
-          token: ${{ secrets.METRICS_TOKEN }}
-          committer_token: ${{ secrets.METRICS_TOKEN }}
-          committer_branch: main
-
+          token: ${{ github.token }}
+          committer_token: ${{ github.token }}
+          committer_branch: metrics
           filename: metrics.profile.svg
           template: classic
           user: austinkimchi
@@ -27,17 +29,15 @@ jobs:
       - name: Most used languages
         uses: lowlighter/metrics@master
         with:
-          token: ${{ secrets.METRICS_TOKEN }}
-          committer_token: ${{ secrets.METRICS_TOKEN }}
-          committer_branch: main
-
+          token: ${{ github.token }}
+          committer_token: ${{ github.token }}
+          committer_branch: metrics
           filename: metrics.languages.svg
           template: classic
           user: austinkimchi
           base: ""
           repositories_affiliations: owner
           config_timezone: America/Los_Angeles
-
           plugin_languages: yes
           plugin_languages_sections: most-used
           plugin_languages_details: percentage
@@ -48,16 +48,14 @@ jobs:
       - name: Contribution calendar
         uses: lowlighter/metrics@master
         with:
-          token: ${{ secrets.METRICS_TOKEN }}
-          committer_token: ${{ secrets.METRICS_TOKEN }}
-          committer_branch: main
-
+          token: ${{ github.token }}
+          committer_token: ${{ github.token }}
+          committer_branch: metrics
           filename: metrics.calendar.svg
           template: classic
           user: austinkimchi
           base: ""
           repositories_affiliations: owner
           config_timezone: America/Los_Angeles
-
           plugin_isocalendar: yes
           plugin_isocalendar_duration: full-year
