@@ -1,0 +1,63 @@
+name: Metrics
+
+on:
+  schedule:
+    - cron: "0 18 * * 0"
+  workflow_dispatch:
+
+jobs:
+  github-metrics:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Profile summary
+        uses: lowlighter/metrics@master
+        with:
+          token: ${{ secrets.METRICS_TOKEN }}
+          committer_token: ${{ secrets.METRICS_TOKEN }}
+          committer_branch: metrics
+
+          filename: metrics.profile.svg
+          template: classic
+          user: austinkimchi
+          base: header, activity, community, repositories
+          repositories_affiliations: owner
+          config_timezone: America/Los_Angeles
+
+      - name: Most used languages
+        uses: lowlighter/metrics@master
+        with:
+          token: ${{ secrets.METRICS_TOKEN }}
+          committer_token: ${{ secrets.METRICS_TOKEN }}
+          committer_branch: metrics
+
+          filename: metrics.languages.svg
+          template: classic
+          user: austinkimchi
+          base: ""
+          repositories_affiliations: owner
+          config_timezone: America/Los_Angeles
+
+          plugin_languages: yes
+          plugin_languages_sections: most-used
+          plugin_languages_details: percentage
+          plugin_languages_categories: programming
+          plugin_languages_ignored: HTML, CSS, Less, EJS, Nunjucks
+          plugin_languages_limit: 8
+
+      - name: Contribution calendar
+        uses: lowlighter/metrics@master
+        with:
+          token: ${{ secrets.METRICS_TOKEN }}
+          committer_token: ${{ secrets.METRICS_TOKEN }}
+          committer_branch: metrics
+
+          filename: metrics.calendar.svg
+          template: classic
+          user: austinkimchi
+          base: ""
+          repositories_affiliations: owner
+          config_timezone: America/Los_Angeles
+
+          plugin_isocalendar: yes
+          plugin_isocalendar_duration: full-year
