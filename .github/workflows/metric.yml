@@ -15,7 +15,7 @@ jobs:
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           committer_token: ${{ secrets.METRICS_TOKEN }}
-          committer_branch: metrics
+          committer_branch: main
 
           filename: metrics.profile.svg
           template: classic
@@ -29,7 +29,7 @@ jobs:
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           committer_token: ${{ secrets.METRICS_TOKEN }}
-          committer_branch: metrics
+          committer_branch: main
 
           filename: metrics.languages.svg
           template: classic
@@ -50,7 +50,7 @@ jobs:
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           committer_token: ${{ secrets.METRICS_TOKEN }}
-          committer_branch: metrics
+          committer_branch: main
 
           filename: metrics.calendar.svg
           template: classic
